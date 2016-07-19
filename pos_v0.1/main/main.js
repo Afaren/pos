@@ -47,7 +47,7 @@ function generateReceipt(totalPrice, subTotalCartItems) {
   return receipt;
 }
 
-function itemCount(cartItems) {
+function calculateItemCount(cartItems) {
   let countedCartItems = [];
 
   for (let rawItem of cartItems) {
@@ -64,7 +64,7 @@ function itemCount(cartItems) {
 }
 // implement
 function printReceipt(inputs) {
-  let countedCartItems = itemCount(inputs);
+  let countedCartItems = calculateItemCount(inputs);
   let subTotalCartItems = calculateSubTotal(countedCartItems);
   let totalPrice = calculateTotalPrice(subTotalCartItems);
   //noinspection UnnecessaryLocalVariableJS

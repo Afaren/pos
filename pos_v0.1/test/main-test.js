@@ -79,13 +79,12 @@ describe('pos', function () {
         count: 1
       }
     ]
-    let acutal = itemCount(inputs);
+    let acutal = calculateItemCount(inputs);
     expect(acutal).toEqual(expectedCountedCartItems);
   });
 
   it('should calculate "subTotal" property and add it into each item', function () {
     let expectedSubTotalCountedCartedItems = [
-
       {
         barcode: 'ITEM000000',
         name: '可口可乐',
@@ -113,16 +112,16 @@ describe('pos', function () {
       }
     ];
 
-    let actual = calculateSubTotal(itemCount(inputs));
+    let actual = calculateSubTotal(calculateItemCount(inputs));
     expect(actual).toEqual(expectedSubTotalCountedCartedItems);
 
   });
+
   it('should calculate "totalPrice" of receipt', function () {
     let expectedTotalPrice = 23;
-    let actual = calculateTotalPrice(calculateSubTotal(itemCount(inputs)));
+    let actual = calculateTotalPrice(calculateSubTotal(calculateItemCount(inputs)));
     expect(actual).toEqual(expectedTotalPrice);
-
-  })
+  });
 
   it('should print correct text', function () {
 
