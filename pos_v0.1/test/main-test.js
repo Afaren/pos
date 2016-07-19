@@ -55,7 +55,7 @@ describe('pos', function () {
     ];
   });
 
-  it('should calculate "count" property and add it into each item', function () {
+  it('should calculate "count" of items', function () {
     let expectedCountedCartItems = [
       {
         barcode: 'ITEM000000',
@@ -78,13 +78,13 @@ describe('pos', function () {
         price: 2.00,
         count: 1
       }
-    ]
+    ];
     let acutal = calculateItemCount(inputs);
     expect(acutal).toEqual(expectedCountedCartItems);
   });
 
-  it('should calculate "subTotal" property and add it into each item', function () {
-    let expectedSubTotalCountedCartedItems = [
+  it('should calculate "subTotal" of items', function () {
+    let expectedCartItems = [
       {
         barcode: 'ITEM000000',
         name: '可口可乐',
@@ -111,15 +111,66 @@ describe('pos', function () {
 
       }
     ];
-
-    let actual = calculateSubTotal(calculateItemCount(inputs));
-    expect(actual).toEqual(expectedSubTotalCountedCartedItems);
+    let countedCartItems = [
+      {
+        barcode: 'ITEM000000',
+        name: '可口可乐',
+        unit: '瓶',
+        price: 3.00,
+        count: 5,
+      },
+      {
+        barcode: 'ITEM000001',
+        name: '雪碧',
+        unit: '瓶',
+        price: 3.00,
+        count: 2,
+      },
+      {
+        barcode: 'ITEM000004',
+        name: '电池',
+        unit: '个',
+        price: 2.00,
+        count: 1,
+      }
+    ];
+    let actual = calculateSubTotal(countedCartItems);
+    expect(actual).toEqual(expectedCartItems);
 
   });
 
   it('should calculate "totalPrice" of receipt', function () {
     let expectedTotalPrice = 23;
-    let actual = calculateTotalPrice(calculateSubTotal(calculateItemCount(inputs)));
+    let subTotalCartItems = [
+      {
+        barcode: 'ITEM000000',
+        name: '可口可乐',
+        unit: '瓶',
+        price: 3.00,
+        count: 5,
+        subTotal: 15
+      },
+      {
+        barcode: 'ITEM000001',
+        name: '雪碧',
+        unit: '瓶',
+        price: 3.00,
+        count: 2,
+        subTotal: 6
+      },
+      {
+        barcode: 'ITEM000004',
+        name: '电池',
+        unit: '个',
+        price: 2.00,
+        count: 1,
+        subTotal: 2
+
+      }
+
+
+    ]
+    let actual = calculateTotalPrice(subTotalCartItems);
     expect(actual).toEqual(expectedTotalPrice);
   });
 
